@@ -15,7 +15,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
   onTestResult
 }) => {
   const [testing, setTesting] = useState<string>('');
-  const [recipientAddress, setRecipientAddress] = useState('0x0000000000000000000000000000000000000000');
+  const [recipientAddress, setRecipientAddress] = useState(account);
   const [sendAmount, setSendAmount] = useState('0.0001');
   const [gasPrice, setGasPrice] = useState('');
   const [gasLimit, setGasLimit] = useState('');
@@ -30,7 +30,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
         to: recipientAddress,
         value: ethers.parseEther(sendAmount)
       });
-      
+
       onTestResult({
         id: Date.now().toString(),
         category: 'transaction',
@@ -84,15 +84,15 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
       }
 
       const tx = await signer.sendTransaction(txRequest);
-      
+
       onTestResult({
         id: Date.now().toString(),
         category: 'transaction',
         test: 'Legacy Gas Transaction',
         status: 'success',
         message: `Legacy transaction sent: ${tx.hash}`,
-        data: { 
-          hash: tx.hash, 
+        data: {
+          hash: tx.hash,
           gasPrice: gasPrice || 'auto',
           gasLimit: gasLimit || 'auto'
         },
@@ -133,14 +133,14 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
       }
 
       const tx = await signer.sendTransaction(txRequest);
-      
+
       onTestResult({
         id: Date.now().toString(),
         category: 'transaction',
         test: 'EIP-1559 Transaction',
         status: 'success',
         message: `EIP-1559 transaction sent: ${tx.hash}`,
-        data: { 
+        data: {
           hash: tx.hash,
           maxFeePerGas: maxFeePerGas || 'auto',
           maxPriorityFeePerGas: maxPriorityFeePerGas || 'auto'
@@ -168,7 +168,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
       const iface = new ethers.Interface([
         'function transfer(address to, uint256 amount)'
       ]);
-      
+
       const data = iface.encodeFunctionData('transfer', [
         recipientAddress,
         ethers.parseUnits('1', 18)
@@ -180,7 +180,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
         data: data,
         gasLimit: 100000n
       });
-      
+
       onTestResult({
         id: Date.now().toString(),
         category: 'transaction',
@@ -247,7 +247,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
             <Gauge size={20} />
             Gas Settings (Optional)
           </h3>
-          
+
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs font-bold uppercase mb-1">
@@ -261,7 +261,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
                 placeholder="Auto"
               />
             </div>
-            
+
             <div>
               <label className="block text-xs font-bold uppercase mb-1">
                 Gas Price (Gwei)
@@ -274,7 +274,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
                 placeholder="Auto"
               />
             </div>
-            
+
             <div>
               <label className="block text-xs font-bold uppercase mb-1">
                 Max Fee (Gwei)
@@ -287,7 +287,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
                 placeholder="Auto"
               />
             </div>
-            
+
             <div>
               <label className="block text-xs font-bold uppercase mb-1">
                 Priority Fee (Gwei)
