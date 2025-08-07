@@ -174,12 +174,12 @@ function App() {
         <div className="bg-brutal-pink brutal-border shadow-brutal-lg p-6 mb-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-4">
-              <div className="bg-black text-white p-3">
-                <Wallet size={32} />
+              <div className="bg-brutal-cyan brutal-border-sm p-2 flex items-center justify-center" style={{ width: '64px', height: '64px' }}>
+                <img src="/logo.svg" alt="WalletBench Logo" className="w-full h-full" />
               </div>
               <div>
-                <h1 className="text-4xl font-bold uppercase">WEB3 WALLET TESTER</h1>
-                <p className="text-sm mt-1 uppercase tracking-wider">Complete JSON-RPC Testing Suite</p>
+                <h1 className="text-4xl font-bold uppercase">WALLETBENCH</h1>
+                <p className="text-sm mt-1 uppercase tracking-wider">Web3 Wallet Extension Testing Suite</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
