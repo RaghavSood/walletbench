@@ -58,7 +58,7 @@ const SignatureTests: React.FC<SignatureTestsProps> = ({
         name: 'Web3 Wallet Tester',
         version: '1',
         chainId: parseInt(await provider.getNetwork().then(n => n.chainId.toString())),
-        verifyingContract: '0x0000000000000000000000000000000000000000'
+        verifyingContract: account
       };
 
       const types = {
@@ -80,7 +80,7 @@ const SignatureTests: React.FC<SignatureTestsProps> = ({
         },
         to: {
           name: 'Bob',
-          wallet: '0x0000000000000000000000000000000000000000'
+          wallet: account
         },
         contents: 'Hello, Bob!'
       };

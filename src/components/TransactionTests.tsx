@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { Send, Play, AlertCircle, Loader2, Zap, DollarSign, Gauge } from 'lucide-react';
 import { TestResult } from '../App';
@@ -21,6 +21,13 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
   const [gasLimit, setGasLimit] = useState('');
   const [maxFeePerGas, setMaxFeePerGas] = useState('');
   const [maxPriorityFeePerGas, setMaxPriorityFeePerGas] = useState('');
+
+  // Update recipient address when account changes
+  useEffect(() => {
+    if (account && recipientAddress !== account) {
+      setRecipientAddress(account);
+    }
+  }, [account, recipientAddress]);
 
   const testBasicTransaction = async () => {
     setTesting('basic_tx');
@@ -171,7 +178,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
 
       const data = iface.encodeFunctionData('transfer', [
         recipientAddress,
-        ethers.parseUnits('1', 18)
+        ethers.parseUnits('1', 1)
       ]);
 
       const signer = await provider.getSigner();
@@ -224,7 +231,7 @@ const TransactionTests: React.FC<TransactionTestsProps> = ({
             value={recipientAddress}
             onChange={(e) => setRecipientAddress(e.target.value)}
             className="w-full p-3 brutal-border-sm focus:shadow-brutal outline-none font-mono text-sm"
-            placeholder="0x..."
+            placeholder={account || "0x..."}
           />
         </div>
 
