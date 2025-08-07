@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-mono;
+  }
+}
+
+@layer utilities {
+  .brutal-border {
+    @apply border-4 border-black;
+  }
+  
+  .brutal-border-sm {
+    @apply border-2 border-black;
+  }
+}

@@ -1,0 +1,4 @@
+.devenv/
+*.sw*
+
+node_modules/
